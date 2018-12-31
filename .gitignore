@@ -6,3 +6,5 @@
 /OpenGL/projects/.vs/OpenGL/v15/Solution.VC.db-wal
 /OpenGL/projects/.vs/OpenGL/v15/Solution.VC.db-shm
 /OpenGL/projects/.vs/OpenGL/v15/.suo
+/OpenGL/projects/Debug
+*.user
