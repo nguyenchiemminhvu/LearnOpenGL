@@ -19,6 +19,7 @@ public:
 	~Shader();
 
 	GLint getAttributeLocation(const char *name);
+	void enableAttribute(const char *name);
 
 	void use();
 	void deleteShader();

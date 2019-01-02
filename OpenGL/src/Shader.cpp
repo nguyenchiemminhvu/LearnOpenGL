@@ -71,6 +71,11 @@ GLint Shader::getAttributeLocation(const char * name)
 	return glGetAttribLocation(program, name);
 }
 
+void Shader::enableAttribute(const char * name)
+{
+	glEnableVertexAttribArray(getAttributeLocation(name));
+}
+
 void Shader::use()
 {
 	glUseProgram(program);
