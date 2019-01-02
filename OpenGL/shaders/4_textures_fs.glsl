@@ -1,6 +1,5 @@
 #version 330 core
 
-varying vec4 vColor;
 varying vec2 vUV;
 
 uniform float sinTime;
