@@ -2,10 +2,8 @@
 
 #include "glad\glad.h"
 #include "GLFW\glfw3.h"
+#include "SOIL\SOIL.h"
 #include "Shader.h"
-
-#define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
 
 #include <iostream>
 
@@ -112,22 +110,22 @@ int main()
 	unsigned int tex;
 	glGenTextures(1, &tex);
 	glBindTexture(GL_TEXTURE_2D, tex);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	int width, height, channels;
-	unsigned char *texData = stbi_load("../textures/container.jpg", &width, &height, &channels, 0);
+	unsigned char *texData = SOIL_load_image("../textures/container.jpg", &width, &height, &channels, 0);
 	if (texData)
 	{
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, texData);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		glGenerateMipmap(GL_TEXTURE_2D);
 	}
 	else
 	{
 		std::cout << "Failed to load texture" << std::endl;
 	}
-	stbi_image_free(texData);
+	SOIL_free_image_data(texData);
 	glBindTexture(GL_TEXTURE_2D, 0);
 
 	// prepare rendering data
@@ -155,12 +153,12 @@ int main()
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	shader.enableAttribute("aPos");
 	glVertexAttribPointer(shader.getAttributeLocation("aPos"), 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (void*)0);
-	shader.enableAttribute("aColor");
+	shader.enableAttribute("aPos");
 	glVertexAttribPointer(shader.getAttributeLocation("aColor"), 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (void*)(3 * sizeof(GLfloat)));
-	shader.enableAttribute("aUV");
+	shader.enableAttribute("aColor");
 	glVertexAttribPointer(shader.getAttributeLocation("aUV"), 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (void*)(6 * sizeof(GLfloat)));
+	shader.enableAttribute("aUV");
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 
@@ -191,9 +189,9 @@ int main()
 		glActiveTexture(tex);
 		glBindTexture(GL_TEXTURE_2D, tex);
 
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
 		glBindVertexArray(vao);
 		glBindBuffer(GL_ARRAY_BUFFER, vbo);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 		// Swap buffers and poll IO events (keys pressed/released, mouse moved, ...)
