@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="textures">
+      <UniqueIdentifier>{dcd2e456-5dd7-405e-97d9-c611741d83f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="shaders">
+      <UniqueIdentifier>{15fd2933-8726-4cb2-a863-737752d8dafe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\glad.c">
@@ -29,5 +35,21 @@
     <ClInclude Include="..\include\Shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\shaders\4_textures_fs.glsl">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="..\shaders\4_textures_vs.glsl">
+      <Filter>shaders</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\textures\wall.jpg">
+      <Filter>textures</Filter>
+    </Image>
+    <Image Include="..\textures\container.jpg">
+      <Filter>textures</Filter>
+    </Image>
   </ItemGroup>
 </Project>

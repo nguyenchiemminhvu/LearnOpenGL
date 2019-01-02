@@ -154,6 +154,14 @@
   <ItemGroup>
     <ClInclude Include="..\include\Shader.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\shaders\4_textures_fs.glsl" />
+    <None Include="..\shaders\4_textures_vs.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\textures\container.jpg" />
+    <Image Include="..\textures\wall.jpg" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
