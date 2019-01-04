@@ -98,7 +98,7 @@ int main()
 	// -------------------
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	glfwSetCursorPosCallback(window, mouseCallback);
-
+	
 	// main loop
 	// -----------
 	while (!glfwWindowShouldClose(window))
