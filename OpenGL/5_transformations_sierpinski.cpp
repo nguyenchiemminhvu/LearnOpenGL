@@ -2,8 +2,6 @@
 
 #include "glad\glad.h"
 #include "GLFW\glfw3.h"
-#include "SOIL\SOIL.h"
-#include "Shader.h"
 
 #include <iostream>
 
@@ -12,7 +10,7 @@ bool pressed_keys[NUM_KEYS] = { false };
 
 void handleKeyPressed(GLFWwindow *window, int key)
 {
-	
+
 }
 
 void handleKeyReleased(GLFWwindow *window, int key)
@@ -101,34 +99,6 @@ int main()
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	glfwSetCursorPosCallback(window, mouseCallback);
 	
-	// create shader
-	// -------------
-	Shader shader("../shaders/5_transformations_vs.glsl", "../shaders/5_transformations_fs.glsl");
-
-	// create texture
-	// --------------
-	unsigned int texID;
-
-	// prepare rendering data
-	// ----------------------
-	float vertices[] = {
-		// positions          // texture coords
-		0.5f,  0.5f, 0.0f,   1.0f, 1.0f, // top right
-		0.5f, -0.5f, 0.0f,   1.0f, 0.0f, // bottom right
-		-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, // bottom left
-		-0.5f,  0.5f, 0.0f,   0.0f, 1.0f  // top left 
-	};
-	unsigned int indices[] = {
-		0, 1, 3, // first triangle
-		1, 2, 3  // second triangle
-	};
-
-	unsigned int vao;
-
-	unsigned int vbo;
-
-	unsigned int ebo;
-
 	// main loop
 	// -----------
 	while (!glfwWindowShouldClose(window))
