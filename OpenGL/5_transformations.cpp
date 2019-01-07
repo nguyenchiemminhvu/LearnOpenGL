@@ -187,18 +187,23 @@ int main()
 
 		shader.use();
 
-		glm::mat4 transform;
-		transform = glm::rotate(transform, glm::radians((float)glfwGetTime() * 10), glm::vec3(0, 0, -1));
-		shader.setUniformMatrix4fv("transform", 1, GL_FALSE, glm::value_ptr(transform));
+		float time = glfwGetTime();
 
 		glActiveTexture(GL_TEXTURE0 + texID);
 		glBindTexture(GL_TEXTURE_2D, texID);
 		shader.setUniform1i("tex", texID);
 
-		glBindVertexArray(vao);
-		glBindBuffer(GL_ARRAY_BUFFER, vbo);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		{
+			glm::mat4 transform;
+			transform = glm::rotate(transform, glm::radians(time * 2), glm::vec3(0, 0, -1));
+			transform *= glm::translate(transform, glm::vec3(glm::cos(glm::radians(time * 2)), glm::sin(glm::radians(time * 2)), 0));
+			shader.setUniformMatrix4fv("transform", 1, GL_FALSE, glm::value_ptr(transform));
+
+			glBindVertexArray(vao);
+			glBindBuffer(GL_ARRAY_BUFFER, vbo);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		}
 
 		// Swap buffers and poll IO events (keys pressed/released, mouse moved, ...)
 		// -------------------------------------------------------------------------
