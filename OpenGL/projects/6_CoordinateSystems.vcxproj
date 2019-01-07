@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="..\6_coordinate_systems.cpp" />
     <ClCompile Include="..\src\glad.c" />
+    <ClCompile Include="..\src\Shader.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{CFB20972-AAC9-44E3-A70D-CE6583B6C0A2}</ProjectGuid>
@@ -151,6 +152,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\Shader.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\shaders\6_coordinate_systems_fs.glsl" />
+    <None Include="..\shaders\6_coordinate_systems_vs.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\textures\container.jpg" />
+    <Image Include="..\textures\wall.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
