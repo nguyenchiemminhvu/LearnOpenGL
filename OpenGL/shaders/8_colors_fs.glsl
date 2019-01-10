@@ -1,13 +1,12 @@
 #version 330 core
 
-varying vec2 vUV;
-
 uniform float sinTime;
 uniform float cosTime;
 
-uniform sampler2D tex;
+uniform vec3 objectColor;
+uniform vec3 lightColor;
 
 void main()
 {
-	gl_FragColor = texture2D(tex, vUV);
+	gl_FragColor = vec4(objectColor * lightColor, 1.0);
 }

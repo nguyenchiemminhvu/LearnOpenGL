@@ -165,29 +165,6 @@ int main()
 	// -------------
 	Shader shader("../shaders/8_colors_vs.glsl", "../shaders/8_colors_fs.glsl");
 
-	// create texture
-	// --------------
-	unsigned int texID;
-	glGenTextures(1, &texID);
-	glBindTexture(GL_TEXTURE_2D, texID);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	int width, height, channels;
-	unsigned char *texData = SOIL_load_image("../textures/container.jpg", &width, &height, &channels, 0);
-	if (texData)
-	{
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, texData);
-		glGenerateMipmap(GL_TEXTURE_2D);
-	}
-	else
-	{
-		std::cout << "Failed to load texture" << std::endl;
-	}
-	SOIL_free_image_data(texData);
-	glBindTexture(GL_TEXTURE_2D, 0);
-
 	// prepare rendering data
 	// ----------------------
 	float vertices[] = {
@@ -246,8 +223,6 @@ int main()
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glEnableVertexAttribArray(shader.getAttributeLocation("aPos"));
 	glVertexAttribPointer(shader.getAttributeLocation("aPos"), 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (void*)0);
-	glEnableVertexAttribArray(shader.getAttributeLocation("aUV"));
-	glVertexAttribPointer(shader.getAttributeLocation("aUV"), 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (void*)(3 * sizeof(GLfloat)));
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 
@@ -270,10 +245,6 @@ int main()
 
 		shader.use();
 
-		glActiveTexture(GL_TEXTURE0 + texID);
-		glBindTexture(GL_TEXTURE_2D, texID);
-		shader.setUniform1i("tex", texID);
-
 		// view and projection matrices
 		glm::mat4 view;
 		view = camera->getViewMatrix();
@@ -281,6 +252,37 @@ int main()
 		glm::mat4 projection;
 		projection = camera->getProjectionMatrix();
 		shader.setUniformMatrix4fv("Projection", 1, GL_FALSE, glm::value_ptr(projection));
+
+		// model matrix
+		{
+			glm::vec3 cubePositions[] = {
+				glm::vec3(0.0f,  0.0f,  0.0f),
+				glm::vec3(2.0f,  5.0f, -15.0f),
+				glm::vec3(-1.5f, -2.2f, -2.5f),
+				glm::vec3(-3.8f, -2.0f, -12.3f),
+				glm::vec3(2.4f, -0.4f, -3.5f),
+				glm::vec3(-1.7f,  3.0f, -7.5f),
+				glm::vec3(1.3f, -2.0f, -2.5f),
+				glm::vec3(1.5f,  2.0f, -2.5f),
+				glm::vec3(1.5f,  0.2f, -1.5f),
+				glm::vec3(-1.3f,  1.0f, -1.5f)
+			};
+
+			for (int i = 0; i < 10; i++)
+			{
+				glm::mat4 model;
+				model = glm::translate(model, cubePositions[i]);
+				model = glm::rotate(model, glm::radians(20.0f * (i + 1) * (float)glfwGetTime()), glm::vec3(sin(glfwGetTime()), cos(glfwGetTime()), sin(glfwGetTime())));
+				shader.setUniformMatrix4fv("Model", 1, GL_FALSE, glm::value_ptr(model));
+
+				shader.setUniform3f("lightColor", 1.0, 1.0, 1.0);
+				shader.setUniform3f("objectColor", 1.0, 0.6, 0.3);
+
+				glBindVertexArray(vao);
+				glBindBuffer(GL_ARRAY_BUFFER, vbo);
+				glDrawArrays(GL_TRIANGLES, 0, 36);
+			}
+		}
 
 		// Swap buffers and poll IO events (keys pressed/released, mouse moved, ...)
 		// -------------------------------------------------------------------------
