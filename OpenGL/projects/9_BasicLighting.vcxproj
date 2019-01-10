@@ -20,7 +20,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\9_basic_lighting.cpp" />
+    <ClCompile Include="..\src\Camera.cpp" />
     <ClCompile Include="..\src\glad.c" />
+    <ClCompile Include="..\src\Point.cpp" />
+    <ClCompile Include="..\src\Shader.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{C739C67A-3273-46A6-8EC7-0FF48BFA8FCD}</ProjectGuid>
@@ -100,7 +103,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>.\..\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;SOIL.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -151,6 +154,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Image Include="..\textures\container.jpg" />
+    <Image Include="..\textures\wall.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\shaders\9_basic_lighting_fs.glsl" />
+    <None Include="..\shaders\9_basic_lighting_vs.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\Camera.h" />
+    <ClInclude Include="..\include\Point.h" />
+    <ClInclude Include="..\include\Shader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
