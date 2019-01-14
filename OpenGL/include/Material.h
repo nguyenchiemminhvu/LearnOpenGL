@@ -23,7 +23,6 @@ public:
 	Material();
 	Material(std::string name, glm::vec3 amb, glm::vec3 diff, glm::vec3 spec, float sh);
 	~Material();
-
 };
 
 class MaterialFactory

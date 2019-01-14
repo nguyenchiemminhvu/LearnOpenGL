@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <algorithm>
 
 
 Material::Material()
@@ -23,6 +24,8 @@ Material::~Material()
 
 }
 
+
+std::map<std::string, Material> MaterialFactory::materials = std::map<std::string, Material>();
 
 void MaterialFactory::make()
 {
@@ -50,8 +53,7 @@ void MaterialFactory::make()
 		ss >> specular.r >> specular.g >> specular.b;
 		ss >> shininess;
 
-		Material mat(name, ambient, diffuse, specular, shininess);
-		materials.insert(std::pair<std::string, Material>(name, mat));
+		materials[name] = Material(name, ambient, diffuse, specular, shininess);
 	}
 
 	file.close();
@@ -60,7 +62,10 @@ void MaterialFactory::make()
 
 Material MaterialFactory::getMaterial(std::string & name)
 {
-
+	if (materials.find(name) != materials.end())
+	{
+		return materials[name];
+	}
 
 	return Material(name, glm::vec3(), glm::vec3(), glm::vec3(), 0.0);
 }
