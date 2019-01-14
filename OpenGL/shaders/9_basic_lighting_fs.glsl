@@ -8,6 +8,8 @@ uniform vec3 objectColor;
 uniform vec3 lightPos;
 uniform vec3 lightColor;
 
+uniform vec3 eyePos;
+
 varying vec3 vPos;
 varying vec3 vNormal;
 
@@ -24,6 +26,12 @@ void main()
 	float diff = max(dot(-lightDir, vNormal), 0.0);
 	diffuse = diff * lightColor * objectColor;
 
-	FinalColor = vec4(ambient + diffuse, 1.0);
+	vec3 specular;
+	vec3 fragToEye = normalize(eyePos - vPos);
+	vec3 reflectDir = reflect(lightDir, vNormal);
+	float spec = pow(max(dot(reflectDir, fragToEye), 0.0), 128.0);
+	specular = spec * lightColor * objectColor;
+
+	FinalColor = vec4(ambient + diffuse + specular, 1.0);
 	gl_FragColor = FinalColor;
 }

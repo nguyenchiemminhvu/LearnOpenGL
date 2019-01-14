@@ -247,6 +247,9 @@ int main()
 
 		shader.use();
 
+		// eye pos
+		shader.setUniform3f("eyePos", camera->cameraPosition.x, camera->cameraPosition.y, camera->cameraPosition.z);
+
 		// view and projection matrices
 		glm::mat4 view;
 		view = camera->getViewMatrix();
