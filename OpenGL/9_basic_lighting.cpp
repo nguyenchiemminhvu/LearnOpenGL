@@ -255,6 +255,10 @@ int main()
 		projection = camera->getProjectionMatrix();
 		shader.setUniformMatrix4fv("Projection", 1, GL_FALSE, glm::value_ptr(projection));
 
+		// light
+		shader.setUniform3f("lightPos", camera->cameraPosition.x, camera->cameraPosition.y, camera->cameraPosition.z);
+		shader.setUniform3f("lightColor", 1.0, 1.0, 1.0);
+
 		// model matrix
 		{
 			glm::vec3 cubePositions[] = {
@@ -277,7 +281,6 @@ int main()
 				model = glm::rotate(model, glm::radians(20.0f * (i + 1) * (float)glfwGetTime()), glm::vec3(sin(glfwGetTime()), cos(glfwGetTime()), sin(glfwGetTime())));
 				shader.setUniformMatrix4fv("Model", 1, GL_FALSE, glm::value_ptr(model));
 
-				shader.setUniform3f("lightColor", 1.0, 1.0, 1.0);
 				shader.setUniform3f("objectColor", 1.0, 0.6, 0.3);
 
 				glBindVertexArray(vao);
