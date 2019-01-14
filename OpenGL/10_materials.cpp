@@ -282,6 +282,19 @@ int main()
 				glm::vec3(-1.3f,  1.0f, -1.5f)
 			};
 
+			std::string cubeMaterials[] = {
+				"emerald",
+				"jade",
+				"obsidian",
+				"pearl",
+				"ruby",
+				"turquoise",
+				"brass",
+				"bronze",
+				"chrome",
+				"gold"
+			};
+
 			for (int i = 0; i < 10; i++)
 			{
 				glm::mat4 model;
@@ -289,7 +302,11 @@ int main()
 				model = glm::rotate(model, glm::radians(20.0f * (i + 1) * (float)glfwGetTime()), glm::vec3(sin(glfwGetTime()), cos(glfwGetTime()), sin(glfwGetTime())));
 				shader.setUniformMatrix4fv("Model", 1, GL_FALSE, glm::value_ptr(model));
 
-				shader.setUniform3f("objectColor", 1.0, 0.6, 0.3);
+				Material mat = MaterialFactory::getMaterial(cubeMaterials[i]);
+				shader.setUniform3f("object.ambient", mat.ambient.r, mat.ambient.g, mat.ambient.b);
+				shader.setUniform3f("object.diffuse", mat.diffuse.r, mat.diffuse.g, mat.diffuse.b);
+				shader.setUniform3f("object.specular", mat.specular.r, mat.specular.g, mat.specular.b);
+				shader.setUniform1f("object.shininess", mat.shininess);
 
 				glBindVertexArray(vao);
 				glBindBuffer(GL_ARRAY_BUFFER, vbo);
