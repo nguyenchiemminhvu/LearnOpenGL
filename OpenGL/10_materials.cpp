@@ -299,7 +299,7 @@ int main()
 			{
 				glm::mat4 model;
 				model = glm::translate(model, cubePositions[i]);
-				model = glm::rotate(model, glm::radians(20.0f * (i + 1) * (float)glfwGetTime()), glm::vec3(sin(glfwGetTime()), cos(glfwGetTime()), sin(glfwGetTime())));
+				model = glm::rotate(model, glm::radians(2.0f * (i + 1) * (float)glfwGetTime()), glm::vec3(sin(glfwGetTime()), cos(glfwGetTime()), sin(glfwGetTime())));
 				shader.setUniformMatrix4fv("Model", 1, GL_FALSE, glm::value_ptr(model));
 
 				Material mat = MaterialFactory::getMaterial(cubeMaterials[i]);
