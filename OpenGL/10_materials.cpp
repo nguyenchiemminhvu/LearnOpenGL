@@ -8,6 +8,7 @@
 #include "glm\gtc\matrix_transform.hpp"
 #include "Shader.h"
 #include "Camera.h"
+#include "Material.h"
 
 #include <iostream>
 
@@ -160,6 +161,10 @@ int main()
 	// -------------------
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	glfwSetCursorPosCallback(window, mouseCallback);
+
+	// create materials
+	// ----------------
+	MaterialFactory::make();
 
 	// create shader
 	// -------------
