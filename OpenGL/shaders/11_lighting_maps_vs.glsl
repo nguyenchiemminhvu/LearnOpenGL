@@ -2,6 +2,7 @@
 
 attribute vec3 aPos;
 attribute vec3 aNormal;
+attribute vec2 aUV;
 
 uniform mat4 Model;
 uniform mat4 View;
@@ -9,6 +10,7 @@ uniform mat4 Projection;
 
 varying vec3 vPos;
 varying vec3 vNormal;
+varying vec2 vUV;
 
 void main()
 {
@@ -16,4 +18,5 @@ void main()
 
 	vPos = vec3(Model * vec4(aPos, 1.0));
 	vNormal = normalize(mat3(transpose(inverse(Model))) * aNormal);
+	vUV = aUV;
 }

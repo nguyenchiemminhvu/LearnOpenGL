@@ -2,8 +2,7 @@
 
 struct Material
 {
-	vec3 ambient;
-	vec3 diffuse;
+	sampler2D diffuse;
 	vec3 specular;
 
 	float shininess;
@@ -21,6 +20,7 @@ uniform vec3 eyePos;
 
 varying vec3 vPos;
 varying vec3 vNormal;
+varying vec2 vUV;
 
 void main()
 {
@@ -28,12 +28,12 @@ void main()
 
 	vec3 ambient;
 	float ambientStrength = 0.1;
-	ambient = lightColor * object.ambient;
+	ambient = lightColor * texture2D(object.diffuse, vUV).rgb;
 
 	vec3 diffuse;
 	vec3 lightDir = normalize(vPos - lightPos);
 	float diff = max(dot(-lightDir, vNormal), 0.0);
-	diffuse = diff * lightColor * object.diffuse;
+	diffuse = diff * lightColor * texture2D(object.diffuse, vUV).rgb;
 
 	vec3 specular;
 	vec3 fragToEye = normalize(eyePos - vPos);

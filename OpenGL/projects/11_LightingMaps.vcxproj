@@ -104,7 +104,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>.\..\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;SOIL.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -155,12 +155,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Image Include="..\textures\container.jpg" />
-    <Image Include="..\textures\container_specular.png" />
-    <Image Include="..\textures\wall.jpg" />
-    <Image Include="..\textures\wood.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="..\shaders\11_lighting_maps_fs.glsl" />
     <None Include="..\shaders\11_lighting_maps_vs.glsl" />
   </ItemGroup>
@@ -169,6 +163,11 @@
     <ClInclude Include="..\include\Material.h" />
     <ClInclude Include="..\include\Point.h" />
     <ClInclude Include="..\include\Shader.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\textures\container.jpg" />
+    <Image Include="..\textures\container_specular.jpg" />
+    <Image Include="..\textures\wall.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
