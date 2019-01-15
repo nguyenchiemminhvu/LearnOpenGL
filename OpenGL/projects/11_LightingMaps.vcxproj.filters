@@ -63,13 +63,13 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\textures\container.jpg">
-      <Filter>textures</Filter>
-    </Image>
-    <Image Include="..\textures\container_specular.jpg">
-      <Filter>textures</Filter>
-    </Image>
     <Image Include="..\textures\wall.jpg">
+      <Filter>textures</Filter>
+    </Image>
+    <Image Include="..\textures\container.png">
+      <Filter>textures</Filter>
+    </Image>
+    <Image Include="..\textures\container_specular.png">
       <Filter>textures</Filter>
     </Image>
   </ItemGroup>

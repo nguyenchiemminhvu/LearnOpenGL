@@ -182,7 +182,7 @@ int main()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	int width, height, channels;
-	unsigned char *texData = SOIL_load_image("../textures/container.jpg", &width, &height, &channels, 0);
+	unsigned char *texData = SOIL_load_image("../textures/container.png", &width, &height, &channels, 0);
 	if (texData)
 	{
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, texData);
@@ -202,7 +202,7 @@ int main()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	int width2, height2, channels2;
-	unsigned char *texData2 = SOIL_load_image("../textures/container_specular.jpg", &width2, &height2, &channels2, 0);
+	unsigned char *texData2 = SOIL_load_image("../textures/container_specular.png", &width2, &height2, &channels2, 0);
 	if (texData2)
 	{
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width2, height2, 0, GL_RGB, GL_UNSIGNED_BYTE, texData2);

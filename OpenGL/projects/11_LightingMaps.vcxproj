@@ -165,8 +165,8 @@
     <ClInclude Include="..\include\Shader.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\textures\container.jpg" />
-    <Image Include="..\textures\container_specular.jpg" />
+    <Image Include="..\textures\container.png" />
+    <Image Include="..\textures\container_specular.png" />
     <Image Include="..\textures\wall.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

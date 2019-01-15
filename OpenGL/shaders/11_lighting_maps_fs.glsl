@@ -8,10 +8,10 @@ struct Material
 	float shininess;
 };
 
+uniform Material object;
+
 uniform float sinTime;
 uniform float cosTime;
-
-uniform Material object;
 
 uniform vec3 lightPos;
 uniform vec3 lightColor;
@@ -28,7 +28,7 @@ void main()
 
 	vec3 ambient;
 	float ambientStrength = 0.1;
-	ambient = lightColor * texture2D(object.diffuse, vUV).rgb;
+	ambient = ambientStrength * lightColor * texture2D(object.diffuse, vUV).rgb;
 
 	vec3 diffuse;
 	vec3 lightDir = normalize(vPos - lightPos);
