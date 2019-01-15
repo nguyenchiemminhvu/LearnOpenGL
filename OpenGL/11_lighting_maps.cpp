@@ -185,7 +185,7 @@ int main()
 	unsigned char *texData = SOIL_load_image("../textures/container.png", &width, &height, &channels, 0);
 	if (texData)
 	{
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, texData);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, texData);
 		glGenerateMipmap(GL_TEXTURE_2D);
 	}
 	else
@@ -205,7 +205,7 @@ int main()
 	unsigned char *texData2 = SOIL_load_image("../textures/container_specular.png", &width2, &height2, &channels2, 0);
 	if (texData2)
 	{
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width2, height2, 0, GL_RGB, GL_UNSIGNED_BYTE, texData2);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width2, height2, 0, GL_RGBA, GL_UNSIGNED_BYTE, texData2);
 		glGenerateMipmap(GL_TEXTURE_2D);
 	}
 	else
