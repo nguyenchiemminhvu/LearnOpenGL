@@ -3,7 +3,7 @@
 struct Material
 {
 	sampler2D diffuse;
-	vec3 specular;
+	sampler2D specular;
 
 	float shininess;
 };
@@ -38,7 +38,7 @@ void main()
 	vec3 fragToEye = normalize(eyePos - vPos);
 	vec3 reflectDir = reflect(lightDir, vNormal);
 	float spec = pow(max(dot(reflectDir, fragToEye), 0.0), 128.0);
-	specular = lightColor * spec * object.specular;
+	specular = lightColor * spec * texture2D(object.specular, vUV).rgb;
 
 	FinalColor = vec4(ambient + diffuse + specular, 1.0);
 	gl_FragColor = FinalColor;
